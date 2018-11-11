@@ -181,21 +181,42 @@ class Turtle{
 
 		if(this.isPenDown){
 			if(newY < 0){
-
+				console.log("***********  < y0  *******************");
 				var offset = this.y;
-				console.log("offset: " + offset);
 				this.lines.push({x1:this.x, y1:this.y, x2: newX, y2: 0});
-
-				console.log("before newY: " + newY);
 				newY = gameHeight - -newY ;
-				console.log("newY: " + newY);
-
 				this.lines.push({x1:this.x, y1:gameHeight, x2: newX, y2: newY});
-
 			}
+
+			else if(newY > gameHeight){
+				console.log("***********  > gh  *******************");
+				var offset = gameHeight - this.y;
+				this.lines.push({x1:this.x, y1:this.y, x2: newX, y2: gameHeight});
+				newY = offset;
+				this.lines.push({x1:this.x, y1:0, x2: newX, y2: newY});
+			}
+
+			else if(newX > gameWidth){
+				console.log("***********  > gw  *******************");
+				var offset = gameWidth - this.x;
+				this.lines.push({x1:this.x, y1:this.y, x2: gameWidth, y2: newY});
+				newX = offset;
+				this.lines.push({x1:0, y1:this.y, x2: newX, y2: newY});
+			}
+			else if(newX < 0){
+				console.log("***********  < x0  *******************");
+				var offset = this.x;
+				this.lines.push({x1:this.x, y1:this.y, x2: 0, y2: newY});
+				newX = gameWidth - -newX ;
+				this.lines.push({x1:gameWidth, y1:this.y, x2: newX, y2: newY});
+			}
+
+
 			else{
 				this.lines.push({x1:this.x, y1:this.y, x2: newX, y2: newY});
 			}
+
+
 
 		}
 		this.x = newX;

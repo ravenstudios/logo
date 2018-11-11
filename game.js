@@ -13,13 +13,13 @@ $(()=>{
 		console.log("click");
 		commands = $("#input").val();
 		turtle.runCommands(commands);
-		// turtle.fd(50);
+		// turtle.move(50);
 		// turtle.rt(90);
-		// turtle.fd(50);
+		// turtle.move(50);
 		// turtle.rt(90);
-		// // turtle.fd(50);
+		// // turtle.move(50);
 		// // turtle.rt(90);
-		// // turtle.fd(50);
+		// // turtle.move(50);
 		// // turtle.rt(90);
 	});
 
@@ -102,17 +102,17 @@ class Turtle{
 			// console.log({x:this.x, y:this.y});
 			switch (commandsArray[i]) {
 				case "fd":
-					this.fd(parseInt(commandsArray[i + 1]));
+					this.move(parseInt(commandsArray[i + 1]));
 					i ++;
 					//console.log("i: " + i);
 					break;
 				case "FORWARD":
-					this.fd(parseInt(commandsArray[i + 1]));
+					this.move(parseInt(commandsArray[i + 1]));
 					i ++;
 					//console.log("i: " + i);
 					break;
 				case "bk":
-					this.bk(parseInt(commandsArray[i + 1]));
+					this.move(-parseInt(commandsArray[i + 1]));
 					i ++;
 					//console.log("i: " + i);
 					break;
@@ -171,7 +171,8 @@ class Turtle{
 		pop();
 	}
 
-	fd(px){
+	move(px){
+		console.log("x: " + this.x + "  y: " + this.y);
 		var newX = this.x + px * cos(this.currentDeg);
 		var newY = this.y + px * sin(this.currentDeg);
 
@@ -193,7 +194,7 @@ class Turtle{
 
 			}
 			else{
-				this.lines.push({x1:this.x, y1:gameHeight, x2: newX, y2: newY});
+				this.lines.push({x1:this.x, y1:this.y, x2: newX, y2: newY});
 			}
 
 		}
